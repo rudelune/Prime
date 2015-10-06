@@ -14,24 +14,36 @@ import java.util.List;
  */
 public class PrimeFinder implements Runnable {
 	
+	private static boolean	mustStop	= false;
+	private static boolean	pause		= false;
+	
+	public static void create() {
+		new Thread(new PrimeFinder()).start();
+	}
+	
+	private PrimeFinder() {
+	}
+	
 	@Override
 	public void run() {
-		while (a <= 600000) {
-			if (isPrime(a)) {
-				addPrime(a);
+		while (!mustStop && a < Window.totalNumbers) {
+			if (!pause) {
+				if (isPrime(a)) {
+					addPrime(a);
+				}
+				a += 2;
+				Window.addPoint(false);
+				Window.addPoint(false);
+				
+				if (isPrime(a)) {
+					addPrime(a);
+				}
+				a += 4;
+				Window.addPoint(false);
+				Window.addPoint(false);
+				Window.addPoint(false);
+				Window.addPoint(false);
 			}
-			a += 2;
-			Window.addPoint(false);
-			Window.addPoint(false);
-			
-			if (isPrime(a)) {
-				addPrime(a);
-			}
-			a += 4;
-			Window.addPoint(false);
-			Window.addPoint(false);
-			Window.addPoint(false);
-			Window.addPoint(false);
 		}
 		Thread.currentThread().interrupt();
 	}
@@ -52,11 +64,21 @@ public class PrimeFinder implements Runnable {
 	private static void addPrime(int number) {
 		primes.add(number);
 		Window.addPoint(true);
-		// System.out.println(number);
 	}
 	
 	public static int getTestedNumbers() {
 		return a;
 	}
 	
+	public static int getPrimeNumbers() {
+		return primes.size() + 2;
+	}
+	
+	public static void stop() {
+		mustStop = true;
+	}
+	
+	public static void togglePause() {
+		pause = !pause;
+	}
 }

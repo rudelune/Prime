@@ -18,7 +18,7 @@ public class Prime {
 		Window.addPoint(true);// 3
 		Window.addPoint(false);// 4
 		
-		new Thread(new PrimeFinder()).start();
+		PrimeFinder.create();
 	}
 	
 }
