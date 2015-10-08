@@ -62,12 +62,12 @@ public class Window extends JFrame {
 		getRootPane().getActionMap().put("SPACE_KEY", spaceAction);
 	}
 	
-	private static int		x			= -1;
-	private static int		y			= 1;
-	private static int		split		= 1;
+	private static int		x			= 0;
+	private static int		y			= 0;
+	private static int		split		= 0;
 	private static boolean	positive	= true;
-	private static boolean	newLine		= true;
-	
+	private static boolean	newLine		= false;
+													
 	public static void addPoint(boolean prime) {
 		if (positive) {
 			if (newLine && x < split) {
