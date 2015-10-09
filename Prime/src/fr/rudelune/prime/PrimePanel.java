@@ -6,7 +6,11 @@ package fr.rudelune.prime;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -42,4 +46,15 @@ public class PrimePanel extends JPanel {
 		image.setRGB(x, y, whiteRGB);
 	}
 	
+	public void saveImage() {
+		File file = new File("prime_screen_" + new Date().getTime() + ".png");
+		try {
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			ImageIO.write(image, "png", file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

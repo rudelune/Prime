@@ -14,10 +14,10 @@ public class Prime {
 	public static void main(String[] args) {
 		new Window();
 		
-		Window.addPoint(false);	// 1
-		Window.addPoint(true);	// 2
-		Window.addPoint(true);	// 3
-		Window.addPoint(false);	// 4
+		Window.addPoint(1, false);
+		Window.addPoint(2, true);
+		Window.addPoint(3, true);
+		Window.addPoint(4, false);
 		
 		PrimeFinder.create();
 	}

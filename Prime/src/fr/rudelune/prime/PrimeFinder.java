@@ -26,23 +26,15 @@ public class PrimeFinder implements Runnable {
 	
 	@Override
 	public void run() {
-		while (!mustStop && a < Window.totalNumbers) {
+		while (!mustStop) {
 			if (!pause) {
-				if (isPrime(a)) {
-					addPrime(a);
-				}
-				a += 2;
-				Window.addPoint(false);
-				Window.addPoint(false);
+				addProbablyPrime(++a);
+				Window.addPoint(++a, false);
 				
-				if (isPrime(a)) {
-					addPrime(a);
-				}
-				a += 4;
-				Window.addPoint(false);
-				Window.addPoint(false);
-				Window.addPoint(false);
-				Window.addPoint(false);
+				addProbablyPrime(++a);
+				Window.addPoint(++a, false);
+				Window.addPoint(++a, false);
+				Window.addPoint(++a, false);
 			}
 		}
 		Thread.currentThread().interrupt();
@@ -50,7 +42,7 @@ public class PrimeFinder implements Runnable {
 	
 	private static List<Integer>	primes	= new ArrayList<Integer>();
 	
-	private static int				a		= 5;
+	private static int				a		= 4;
 	
 	private static boolean isPrime(int number) {
 		int squaredRoot = (int) Math.floor(Math.sqrt(number));
@@ -64,9 +56,13 @@ public class PrimeFinder implements Runnable {
 		return true;
 	}
 	
-	private static void addPrime(int number) {
-		primes.add(number);
-		Window.addPoint(true);
+	private static void addProbablyPrime(int number) {
+		if (isPrime(number)) {
+			primes.add(number);
+			Window.addPoint(number, true);
+		} else {
+			Window.addPoint(number, false);
+		}
 	}
 	
 	public static int getTestedNumbers() {
