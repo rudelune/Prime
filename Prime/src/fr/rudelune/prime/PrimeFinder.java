@@ -53,9 +53,12 @@ public class PrimeFinder implements Runnable {
 	private static int				a		= 5;
 	
 	private static boolean isPrime(int number) {
+		int squaredRoot = (int) Math.floor(Math.sqrt(number));
 		for (int i = 0; i < primes.size(); i++) {
 			if (number % primes.get(i) == 0) {
 				return false;
+			} else if (primes.get(i) >= squaredRoot) {
+				return true;
 			}
 		}
 		return true;
