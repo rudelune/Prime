@@ -28,7 +28,7 @@ public class TextPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.WHITE);
+		g.setColor(Color.MAGENTA);
 		g.drawString("Nombres testés   : " + PrimeFinder.getTestedNumbers(), 0, Window.height - 50);
 		g.drawString("Nombres premiers : " + PrimeFinder.getPrimeNumbers(), 0, Window.height - 35);
 		

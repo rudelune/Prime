@@ -3,7 +3,13 @@
  */
 package fr.rudelune.prime;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,17 +27,14 @@ public class PrimeFinder implements Runnable {
 		new Thread(new PrimeFinder()).start();
 	}
 	
-	private PrimeFinder() {
-	}
-	
 	@Override
 	public void run() {
 		while (!mustStop) {
 			if (!pause) {
-				addProbablyPrime(++a);
+				addMaybePrime(++a);
 				Window.addPoint(++a, false);
 				
-				addProbablyPrime(++a);
+				addMaybePrime(++a);
 				Window.addPoint(++a, false);
 				Window.addPoint(++a, false);
 				Window.addPoint(++a, false);
@@ -56,7 +59,7 @@ public class PrimeFinder implements Runnable {
 		return true;
 	}
 	
-	private static void addProbablyPrime(int number) {
+	private static void addMaybePrime(int number) {
 		if (isPrime(number)) {
 			primes.add(number);
 			Window.addPoint(number, true);
@@ -79,5 +82,25 @@ public class PrimeFinder implements Runnable {
 	
 	public static void togglePause() {
 		pause = !pause;
+	}
+	
+	public static void savePrimes() {
+		File file = new File("prime_" + new Date().getTime() + ".txt");
+		try {
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			OutputStream os = new FileOutputStream(file);
+			PrintStream printStream = new PrintStream(os);
+			printStream.println("2\n3");
+			List<Integer> primesCopy = new ArrayList<Integer>();
+			primesCopy.addAll(primes);
+			for (int prime : primesCopy) {
+				printStream.println(prime + "");
+			}
+			printStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

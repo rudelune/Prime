@@ -64,6 +64,9 @@ public class Window extends JFrame {
 		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
 			KeyStroke.getKeyStroke(KeyEvent.VK_INSERT, 0), "SCREEN");
 		getRootPane().getActionMap().put("SCREEN", screenAction);
+		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+			KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "SAVE");
+		getRootPane().getActionMap().put("SAVE", saveAction);
 	}
 	
 	private static int		x			= 0;
@@ -143,6 +146,15 @@ public class Window extends JFrame {
 														@Override
 														public void actionPerformed(ActionEvent e) {
 															primePanel.saveImage();
+														}
+													};
+	
+	private final AbstractAction	saveAction		= new AbstractAction() {
+														private static final long	serialVersionUID	= 1L;
+														
+														@Override
+														public void actionPerformed(ActionEvent e) {
+															PrimeFinder.savePrimes();
 														}
 													};
 }

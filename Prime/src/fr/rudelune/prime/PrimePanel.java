@@ -57,4 +57,5 @@ public class PrimePanel extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	
 }
